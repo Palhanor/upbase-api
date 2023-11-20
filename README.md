@@ -2,6 +2,13 @@
 
 Esta é uma API desenvolvida para o desafio backend da empresa UpBase. A ideia é utilizar a tecnologia NodeJS para criar um sistema de cadastro de alunos e professores em uma plataforma chamada UpBase Portal, integrando tecnologias backend (Node.js, TypeScript, Express, Prisma, Zod) com poersistência via banco de dados MySQL.
 
+## Sumário
+1. [Tecnologias Utilizadas](#tecnologias-utilizadas)
+2. [Configuração](#configuração)
+3. [Endpoints](#endpoints)
+4. [Estrutura do Projeto](#estrutura-do-projeto)
+5. [Regras de Negócio](#regras-de-negócio)
+
 ## Tecnologias Utilizadas
 
 - Node.js
