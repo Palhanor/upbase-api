@@ -6,15 +6,14 @@ import { UserRepository } from "../repository/UserRepository";
 export class UserService {
   constructor(private userRepository: UserRepository) {}
 
-  async createUser(userDto: RequestUserDTO) {
-    const existingUsername = await this.userRepository.findByUsername(userDto.username);
-    if (existingUsername) {
-      throw new Error("O nome de usuário informado já está em uso");
-    }
+  async getUsers() {
+    return await this.userRepository.findUsers();
+  }
 
-    const existingEmail = await this.userRepository.findByEmail(userDto.email);
-    if (existingEmail) {
-      throw new Error("O endereço de e-mail informado já está em uso");
+  async createUser(userDto: RequestUserDTO) {
+    const usernamePattern = /^[0-9a-zA-Z_]{3,127}$/;
+    if (!usernamePattern.test(userDto.username)) {
+      throw new Error("O nome de usuário deve contar apenas letras, números e underline");
     }
 
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,63}$/;
@@ -29,6 +28,17 @@ export class UserService {
     if (userDto.student && userDto.teacher || !userDto.student && !userDto.teacher) {
       throw new Error("O novo usuário deve ser um estudante ou um professor");
     }
+
+    const existingUsername = await this.userRepository.findByUsername(userDto.username);
+    if (existingUsername) {
+      throw new Error("O nome de usuário informado já está em uso");
+    }
+
+    const existingEmail = await this.userRepository.findByEmail(userDto.email);
+    if (existingEmail) {
+      throw new Error("O endereço de e-mail informado já está em uso");
+    }
+
 
     const hashedPassword = await bcrypt.hash(userDto.password, 10);
     
