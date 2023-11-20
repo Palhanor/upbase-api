@@ -1,0 +1,206 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "UpBase",
+        "description": "Rota para cadastro de usuários no sistema da UpBase",
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/v1/api/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Cadastro de novos usuários",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "student": {
+                                        "type": "boolean"
+                                    },
+                                    "teacher": {
+                                        "type": "boolean"
+                                    },
+                                    "passwordConfirmation": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "username": "omnihil",
+                                    "email": "omnihil@gmail.com",
+                                    "name": "Lucas Palhano",
+                                    "password": "We982civr35BUcVeu",
+                                    "student": true,
+                                    "teacher": false,
+                                    "passwordConfirmation": "We982civr35BUcVeu"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário cadastrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "id": 1,
+                                        "username": "omnihil",
+                                        "email": "omnihil@gmail.com",
+                                        "name": "Lucas Palhano",
+                                        "student": true,
+                                        "teacher": false,
+                                        "createdAt": "2023-11-20T18:03:10.539Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro da requisição",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "error": "O nome de usuário informado já está em uso"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Problema nos servidores",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "error": "Erro Interno do Servidor"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Lista todos os usuários",
+                "responses": {
+                    "200": {
+                        "description": "Usuários retornados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": [
+                                        {
+                                            "id": 1,
+                                            "username": "omnihil",
+                                            "email": "omnihil@gmail.com",
+                                            "name": "Lucas Palhano",
+                                            "student": true,
+                                            "teacher": false,
+                                            "createdAt": "2023-11-20T18:03:10.539Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UserDTO": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "description": "Nome único de identificação do usuário"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "E-mail de cadastro do usuário"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Nome completo social do usuário"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "Senha de cadastro na plataforma"
+                    },
+                    "student": {
+                        "type": "boolean",
+                        "description": "Tipo de usuário cadastrado como aluno"
+                    },
+                    "teacher": {
+                        "type": "boolean",
+                        "description": "Tipo de usuário cadastrado como professor"
+                    },
+                    "passwordConfirmation": {
+                        "type": "string",
+                        "description": "Confirmação da senha"
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "Ui único do usuário"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "Nome único de identificação do usuário"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "E-mail de cadastro do usuário"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Nome completo social do usuário"
+                    },
+                    "student": {
+                        "type": "boolean",
+                        "description": "Tipo de usuário cadastrado como aluno"
+                    },
+                    "teacher": {
+                        "type": "boolean",
+                        "description": "Tipo de usuário cadastrado como professor"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "Data de criação do usuário"
+                    }
+                }
+            }
+        }
+    }
+}
